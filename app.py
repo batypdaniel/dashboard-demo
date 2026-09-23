@@ -26,6 +26,8 @@ BASELINE = "#c3c2b7"
 # categorical slots, always assigned in this order (validated for colour-vision deficiency)
 SLOTS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#4a3aa7", "#e34948"]
 SEQ_BLUE = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
+# one-hue green ramp built around slot 6 (#008300); OKLab lightness falls monotonically 0.93 -> 0.30
+SEQ_GREEN = ["#d6f0d3", "#aedfa8", "#7fc977", "#4cad44", "#1f9119", "#007400", "#005400", "#003a00"]
 
 CATEGORY_ORDER = ["Coffee", "Food", "Bakery", "Seasonal", "Tea", "Retail"]
 REGION_ORDER = ["Seattle Metro", "Portland Metro", "Northern California"]
@@ -250,18 +252,18 @@ with tab_overview:
 with tab_time:
     n_days = fdf.groupby("dow", observed=False).date.nunique().clip(lower=1)
     heat = fdf.groupby(["dow", "hour"], observed=False).revenue.sum().unstack("hour").fillna(0)
-    heat = heat.div(n_days, axis=0)
-    fig = px.imshow(heat, x=[f"{h % 12 or 12}{'am' if h < 12 else 'pm'}" for h in heat.columns],
-                    y=heat.index.astype(str), color_continuous_scale=SEQ_BLUE, aspect="auto",
-                    title="Average revenue per day, by weekday and hour")
-    fig.update_traces(xgap=2, ygap=2, hovertemplate="%{y} %{x}<br>%{z:$,.0f} per day<extra></extra>")
+    heat = heat.div(n_days, axis=0).T  # rows = hours, columns = weekdays
+    heat.index = [f"{h % 12 or 12}{'am' if h < 12 else 'pm'}" for h in heat.index]
+    fig = px.imshow(heat, x=heat.columns.astype(str), y=heat.index, color_continuous_scale=SEQ_GREEN,
+                    aspect="auto", title="Average revenue per day, by weekday and hour")
+    fig.update_traces(xgap=2, ygap=2, hovertemplate="%{x} %{y}<br>%{z:$,.0f} per day<extra></extra>")
     fig.update_layout(coloraxis_colorbar=dict(title=None, tickformat="$,.0f", thickness=12),
                       xaxis_title=None, yaxis_title=None)
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
-    heat_table = heat.round(2).reset_index()
+    heat_table = heat.round(2).rename_axis("Hour").reset_index()
     heat_table.columns = [str(c) for c in heat_table.columns]
-    show(fig, heat_table, height=340)
+    show(fig, heat_table, height=420)
 
     c1, c2 = st.columns(2)
     with c1:
