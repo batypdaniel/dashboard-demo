@@ -6,6 +6,14 @@ A synthetic sales dataset for a fictional 8-store coffee chain, plus an interact
 ## Quick start
 
 ```bash
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Windows PowerShell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
 streamlit run app.py          # opens http://localhost:8501
 ```
