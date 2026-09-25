@@ -30,7 +30,7 @@ SEQ_BLUE = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#
 SEQ_GREEN = ["#d6f0d3", "#aedfa8", "#7fc977", "#4cad44", "#1f9119", "#007400", "#005400", "#003a00"]
 
 CATEGORY_ORDER = ["Coffee", "Food", "Bakery", "Seasonal", "Tea", "Retail"]
-REGION_ORDER = ["Seattle Metro", "Portland Metro", "Northern California"]
+REGION_ORDER = ["Memphis Metro", "Nashville Metro", "Mississippi"]
 CUSTOMER_ORDER = ["Rewards Member", "Returning", "New"]
 PAYMENT_ORDER = ["Credit/Debit Card", "Mobile App", "Mobile Wallet", "Cash", "Gift Card"]
 DOW_ORDER = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
@@ -365,7 +365,7 @@ with tab_stores:
     sm_table = store_month.round(0).reset_index()
     sm_table.columns = ["Store"] + [m.strftime("%b %Y") for m in store_month.columns]
     show(fig, sm_table, height=380)
-    st.caption("Sacramento Midtown opened on March 10 and ramps up over its first ~10 weeks.")
+    st.caption("Fondren opened on March 10 and ramps up over its first ~10 weeks.")
 
 # ---------------------------------------------------------------------- customers
 with tab_customers:

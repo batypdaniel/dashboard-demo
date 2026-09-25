@@ -47,7 +47,7 @@ Patterns built into the data, so the dashboard has real stories to show:
 - **Time of day:** a morning rush at 9am and a lunch peak at noon; urban stores peak on weekday mornings, while suburban stores are busiest on weekends.
 - **Seasonality:** iced drinks and salads in summer; chai and hot chocolate in winter; limited-time drinks (Lavender Oat Latte in spring, Pumpkin Spice in fall, Peppermint Mocha during the holidays); retail gifts in December; a January slump; and about 8% growth over the year.
 - **Dayparts:** breakfast sandwiches and pastries sell in the morning, and paninis and salads at lunch.
-- **New store:** Sacramento Midtown opens on March 10 and ramps up over about 10 weeks. Its hotter climate means more iced drinks.
+- **New store:** Fondren opens on March 10 and ramps up over about 10 weeks. Its hotter climate means more iced drinks.
 - **Customers:** rewards members buy bigger baskets and mostly pay in the app. Cash is more common at suburban stores, mobile wallets at urban stores, and gift-card use jumps in January.
 
 Margins count product cost (COGS) only, so they are gross margins (~74%) with no labour or rent.

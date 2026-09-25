@@ -6,7 +6,7 @@ One row per line item (a transaction can hold several items). Built-in patterns:
   * mild traffic seasonality, a slight growth trend across the year, daily noise
   * seasonal menu items (iced drinks in summer, pumpkin spice in fall, etc.)
   * food follows meal times (breakfast sandwiches in the morning, paninis at lunch)
-  * a store that opens partway through the year (Sacramento, March 2025)
+    * a store that opens partway through the year (Fondren, March 2025)
   * customer type and payment method with realistic correlations
 
 Usage:
@@ -30,14 +30,14 @@ HOURS = np.arange(OPEN_HOUR, CLOSE_HOUR)
 # traffic: relative daily transaction volume; kind drives the weekday/weekend mix.
 STORES = pd.DataFrame(
     [
-        ("S01", "Seattle Downtown", "Seattle", "Seattle Metro", "urban", 1.40, "2020-01-01"),
-        ("S02", "Capitol Hill", "Seattle", "Seattle Metro", "urban", 1.10, "2020-01-01"),
-        ("S03", "Bellevue Square", "Bellevue", "Seattle Metro", "suburban", 1.00, "2020-01-01"),
-        ("S04", "Pearl District", "Portland", "Portland Metro", "urban", 1.00, "2020-01-01"),
-        ("S05", "Lake Oswego", "Lake Oswego", "Portland Metro", "suburban", 0.75, "2020-01-01"),
-        ("S06", "SF Financial District", "San Francisco", "Northern California", "urban", 1.30, "2020-01-01"),
-        ("S07", "Rockridge", "Oakland", "Northern California", "suburban", 0.85, "2020-01-01"),
-        ("S08", "Sacramento Midtown", "Sacramento", "Northern California", "suburban", 0.90, "{year}-03-10"),
+        ("S01", "Memphis Downtown", "Memphis, TN", "Memphis Metro", "urban", 1.40, "2020-01-01"),
+        ("S02", "Memphis Midtown", "Memphis, TN", "Memphis Metro", "urban", 1.10, "2020-01-01"),
+        ("S03", "Memphis East", "Memphis, TN", "Memphis Metro", "urban", 1.00, "2020-01-01"),
+        ("S04", "Germantown", "Germantown, TN", "Memphis Metro", "urban", 1.00, "2020-01-01"),
+        ("S05", "Collierville", "Collierville, TN", "Memphis Metro", "suburban", 0.75, "2020-01-01"),
+        ("S06", "Green Hills", "Nashville, TN", "Nashville Metro", "urban", 1.30, "2020-01-01"),
+        ("S07", "University", "Oxford, MS", "Mississippi", "urban", 0.85, "2020-01-01"),
+        ("S08", "Fondren", "Jackson, MS", "Mississippi", "suburban", 0.90, "{year}-03-10"),
     ],
     columns=["store_id", "store_name", "city", "region", "store_type", "traffic", "open_date"],
 )
@@ -203,7 +203,7 @@ def generate(year: int = 2025, seed: int = 42, base_transactions: float = 20.0) 
             line_txn = np.repeat(np.arange(n_txn), n_items)
             line_hour_idx = hours[line_txn] - OPEN_HOUR
             w = hour_w[line_hour_idx].copy()
-            if store.city == "Sacramento":
+            if store.city == "Jackson":
                 w[:, iced_idx] *= 1.6  # hotter climate
             cdf = np.cumsum(w, axis=1)
             u = rng.random(len(line_txn)) * cdf[:, -1]
