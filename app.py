@@ -65,7 +65,7 @@ st.set_page_config(page_title="Brewline Coffee Co. — Sales Dashboard", page_ic
 st.markdown(
     """
     <style>
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
         div[data-testid="stHorizontalBlock"] {
             flex-wrap: wrap;
         }
