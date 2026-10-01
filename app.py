@@ -1,4 +1,4 @@
-"""Streamlit dashboard for the synthetic Brewline Coffee Co. sales dataset.
+"""Streamlit dashboard for the synthetic Local Grind Coffee Co. sales dataset.
 
 Run:  streamlit run app.py
 """
@@ -60,7 +60,7 @@ pio.templates["brew"] = go.layout.Template(
 )
 pio.templates.default = "brew"
 
-st.set_page_config(page_title="Brewline Coffee Co. — Sales Dashboard", page_icon="☕", layout="wide")
+st.set_page_config(page_title="Local Grind Coffee Co. — Sales Dashboard", page_icon="☕", layout="wide")
 
 st.markdown(
     """
@@ -162,7 +162,7 @@ def hbar(frame: pd.DataFrame, y: str, x: str, title: str, color: str | None = No
 # ------------------------------------------------------------------------ layout
 df = load_data()
 
-st.title("☕ Brewline Coffee Co. — Sales Dashboard")
+st.title("☕ Local Grind Coffee Co. — Sales Dashboard")
 st.caption(
     f"Synthetic point-of-sale data · {df.store_id.nunique()} stores · "
     f"{df.timestamp.min():%b %d, %Y} – {df.timestamp.max():%b %d, %Y} · open 9am–5pm"
@@ -441,4 +441,4 @@ with tab_data:
     if len(fdf) > 5000:
         st.caption("Showing the first 5,000 rows; the download contains all of them.")
     st.download_button("Download filtered data (CSV)", fdf[cols].to_csv(index=False).encode(),
-                       file_name="brewline_sales_filtered.csv", mime="text/csv")
+                       file_name="local_grind_sales_filtered.csv", mime="text/csv")

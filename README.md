@@ -1,4 +1,4 @@
-# Brewline Coffee Co. — Sales Dashboard Demo
+# Local Grind Coffee Co. — Sales Dashboard Demo
 
 A synthetic sales dataset for a fictional 8-store coffee chain, plus an interactive
 [Streamlit](https://streamlit.io) + Plotly dashboard that summarizes it.
