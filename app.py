@@ -62,6 +62,23 @@ pio.templates.default = "brew"
 
 st.set_page_config(page_title="Brewline Coffee Co. — Sales Dashboard", page_icon="☕", layout="wide")
 
+st.markdown(
+    """
+    <style>
+    @media (max-width: 900px) {
+        div[data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap;
+        }
+        div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+            flex: 1 1 280px;
+            min-width: min(100%, 280px);
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 # -------------------------------------------------------------------------- data
 @st.cache_data(show_spinner="Loading sales data…")
