@@ -74,6 +74,10 @@ st.markdown(
             min-width: min(100%, 280px);
         }
     }
+    div.st-key-kpi-grid div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+        flex: 1 1 calc(33.333% - 16px);
+        min-width: 0;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -208,13 +212,15 @@ def delta(key: str, pct_points: bool = False) -> str | None:
     return f"{cur[key] / prev[key] - 1:+.1%}"
 
 
-k = st.columns(6)
-k[0].metric("Revenue", f"${cur['revenue']:,.0f}", delta("revenue"), border=True)
-k[1].metric("Gross profit", f"${cur['profit']:,.0f}", delta("profit"), border=True)
-k[2].metric("Gross margin", f"{cur['margin']:.1%}", delta("margin", pct_points=True), border=True)
-k[3].metric("Transactions", f"{cur['transactions']:,}", delta("transactions"), border=True)
-k[4].metric("Avg ticket", f"${cur['avg_ticket']:.2f}", delta("avg_ticket"), border=True)
-k[5].metric("Items sold", f"{cur['items']:,}", delta("items"), border=True)
+with st.container(key="kpi-grid"):
+    k = st.columns(3)
+    k[0].metric("Revenue", f"${cur['revenue']:,.0f}", delta("revenue"), border=True)
+    k[1].metric("Gross profit", f"${cur['profit']:,.0f}", delta("profit"), border=True)
+    k[2].metric("Gross margin", f"{cur['margin']:.1%}", delta("margin", pct_points=True), border=True)
+    k = st.columns(3)
+    k[0].metric("Transactions", f"{cur['transactions']:,}", delta("transactions"), border=True)
+    k[1].metric("Avg ticket", f"${cur['avg_ticket']:.2f}", delta("avg_ticket"), border=True)
+    k[2].metric("Items sold", f"{cur['items']:,}", delta("items"), border=True)
 st.caption(
     f"Change vs. the previous {span.days + 1} days ({prev_start:%b %d} – {prev_end:%b %d})."
     if prev else "Pick a shorter date range to compare against the previous period."
